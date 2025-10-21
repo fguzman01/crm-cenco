@@ -1,0 +1,2 @@
+# CRM System Requirements
+# No external dependencies required - using Python standard library only
