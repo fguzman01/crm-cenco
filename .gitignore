@@ -2,3 +2,6 @@
 *.prefs
 target
 allure-results
+
+# Ignorar APKs grandes
+src/test/resources/apk/old/app-dev-debug.apk
