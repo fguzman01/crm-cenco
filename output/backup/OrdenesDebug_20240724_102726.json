@@ -1,0 +1,20 @@
+{
+  "ordenesVtex" : [ {
+    "compraId" : "10096809",
+    "boleta" : "15139642",
+    "rut" : "16.813.869-5",
+    "monto" : "12290",
+    "fecha" : "2024-07-24",
+    "paymentMethod" : "DebitoOneClick",
+    "purchaseStatus" : "Authorized - Transaccion apro",
+    "email" : "nelson.ruizfaundez@externos-cl.cencosud.com",
+    "app" : "jumbodev",
+    "deliveryType" : "Despacho Especial 1500",
+    "salesChannel" : "1",
+    "tienda" : "Jumbo Los Andes",
+    "ordenStatus" : "Facturado",
+    "fechaBoleta" : "20240724",
+    "validaBoleta" : "PASS",
+    "tipoPedido" : "Normal"
+  } ]
+}

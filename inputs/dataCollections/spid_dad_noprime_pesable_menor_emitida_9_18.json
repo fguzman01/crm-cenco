@@ -1,0 +1,35 @@
+[
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 3,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Express"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 2,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Express"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 1,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Express"
+    }
+]

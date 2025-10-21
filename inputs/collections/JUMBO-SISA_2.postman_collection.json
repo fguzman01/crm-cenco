@@ -1,0 +1,1820 @@
+{
+	"info": {
+		"_postman_id": "4b2786ea-9cd0-4670-926f-289ef255311d",
+		"name": "PaymentFlow - Runner SISA - JUMBO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2200989"
+	},
+	"item": [
+		{
+			"name": "Vtex",
+			"item": [
+				{
+					"name": "get Client Data from MasterData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('masterDataUserObject', jsonData);",
+									"//console.log(pm.environment.get('masterDataUserObject'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var iteration = pm.info.iteration + 1;",
+									"var app = pm.iterationData.get(\"app\");",
+									"pm.environment.set('salesChannelVtex', pm.iterationData.get(\"salesChannel\"));",
+									"console.log(\"Comienza con el flujo Nº \" + iteration + \"\\n Para la aplicación: \" + app)",
+									"switch(app.toLowerCase()) {",
+									"    case \"jumbodev\":",
+									"        pm.environment.set('scope', \"jumboprepro\");",
+									"        pm.environment.set('URLVTEXID', \"https://vtexid.vtex.com.br:443/api\")",
+									"        pm.environment.set('URLVTEX', \"https://jumboprepro.vtexcommercestable.com.br:443/api\");",
+									"        pm.environment.set('URLVTEXPAYMENT', \"https://jumboprepro.vtexpayments.com.br/api\");",
+									"        pm.environment.set('X-VTEX-API-AppKey', \"vtexappkey-jumboprepro-KMSANI\");",
+									"        pm.environment.set('X-VTEX-API-AppToken', \"YXXIAWNNSCBYLOUMRWUYQSAGGXBGHDTLFFKCPCJHKEPGIVNRRONATYEFXRCCUHFOJQSGERXONNOMDTYKKJPTPSSHAEFYAGMCYAXRCHMARZNGJSBDTRSLRMZQYLFALYOG\");",
+									"        pm.environment.set('URLVTEXMASTERDATA', \"https://jumboprepro.vtexcommercestable.com.br:443/api\");",
+									"        pm.environment.set('X-VTEX-API-AppKey-MD', \"vtexappkey-jumboprepro-KMSANI\");",
+									"        pm.environment.set('X-VTEX-API-AppToken-MD', \"YXXIAWNNSCBYLOUMRWUYQSAGGXBGHDTLFFKCPCJHKEPGIVNRRONATYEFXRCCUHFOJQSGERXONNOMDTYKKJPTPSSHAEFYAGMCYAXRCHMARZNGJSBDTRSLRMZQYLFALYOG\");",
+									"        pm.environment.set('URLPAYMENT', \"https://3oqflvojd4-vpce-017d2ba47f7b4fb0e.execute-api.us-east-1.amazonaws.com/prod/core-qa\");",
+									"        pm.environment.set('apiKeyPayment', \"f1esJ6wRTga0KscboNusw6U7rAPoPXMD1ugLjqWn\");",
+									"        break;",
+									"    case \"spiddev\":",
+									"        pm.environment.set('scope', \"jumboprepro\");",
+									"        pm.environment.set('URLVTEXID', \"https://vtexid.vtex.com.br:443/api\")",
+									"        pm.environment.set('URLVTEX', \"https://jumboprepro.vtexcommercestable.com.br:443/api\");",
+									"        pm.environment.set('URLVTEXPAYMENT', \"https://jumboprepro.vtexpayments.com.br/api\");",
+									"        pm.environment.set('X-VTEX-API-AppKey', \"vtexappkey-jumboprepro-KMSANI\");",
+									"        pm.environment.set('X-VTEX-API-AppToken', \"YXXIAWNNSCBYLOUMRWUYQSAGGXBGHDTLFFKCPCJHKEPGIVNRRONATYEFXRCCUHFOJQSGERXONNOMDTYKKJPTPSSHAEFYAGMCYAXRCHMARZNGJSBDTRSLRMZQYLFALYOG\");",
+									"        pm.environment.set('URLVTEXMASTERDATA', \"https://jumboprepro.vtexcommercestable.com.br:443/api\");",
+									"        pm.environment.set('X-VTEX-API-AppKey-MD', \"vtexappkey-jumboprepro-KMSANI\");",
+									"        pm.environment.set('X-VTEX-API-AppToken-MD', \"YXXIAWNNSCBYLOUMRWUYQSAGGXBGHDTLFFKCPCJHKEPGIVNRRONATYEFXRCCUHFOJQSGERXONNOMDTYKKJPTPSSHAEFYAGMCYAXRCHMARZNGJSBDTRSLRMZQYLFALYOG\");",
+									"        pm.environment.set('URLPAYMENT', \"https://3oqflvojd4-vpce-017d2ba47f7b4fb0e.execute-api.us-east-1.amazonaws.com/prod/core-qa\");",
+									"        pm.environment.set('apiKeyPayment', \"lIMg6hgdwr5wYIdEwJHjq2ODwZr87XyF1u6oBU3e\");",
+									"        break;",
+									"    case \"sisadev\":",
+									"        pm.environment.set('URLVTEXID', \"https://vtexid.vtex.com.br/api\")",
+									"        pm.environment.set('URLVTEXPAYMENT', \"https://santaisabelhomolog.vtexpayments.com.br/api\")",
+									"        pm.environment.set('URLVTEX', \"https://santaisabelhomolog.myvtex.com/api\")",
+									"        pm.environment.set('X-VTEX-API-AppKey', \"vtexappkey-santaisabelhomolog-XIXUQA\")",
+									"        pm.environment.set('X-VTEX-API-AppToken', \"GMQWVRKUMKFVZOABLTTPBWOBYJIGXXYVYIHWZYVDVXILYRSPPPOBDAYJXPXMJDWOMJWQHECNYQTDOCDHQSRIJWRYKXZJAIUSBUZOUCILMADNGUVUMPWQMOEPRYGJFSMP\")",
+									"        pm.environment.set('URLVTEXMASTERDATA', \"https://santaisabelhomolog.vtexcommercestable.com.br:443/api\");",
+									"        pm.environment.set('X-VTEX-API-AppKey-MD', \"vtexappkey-santaisabelhomolog-XIXUQA\");",
+									"        pm.environment.set('X-VTEX-API-AppToken-MD', \"GMQWVRKUMKFVZOABLTTPBWOBYJIGXXYVYIHWZYVDVXILYRSPPPOBDAYJXPXMJDWOMJWQHECNYQTDOCDHQSRIJWRYKXZJAIUSBUZOUCILMADNGUVUMPWQMOEPRYGJFSMP\")",
+									"        pm.environment.set('URLPAYMENT', \"https://3oqflvojd4-vpce-017d2ba47f7b4fb0e.execute-api.us-east-1.amazonaws.com/prod/core-qa\")",
+									"        pm.environment.set('apiKeyPayment', \"4k7UvNuVmO3AQ5BJnCWpD70balMRfjBb3IadYcPZ\")",
+									"        pm.variables.set('scope', \"santaisabelhomolog\")",
+									"        break;",
+									"}",
+									"//pm.variables.set('loginPass', pm.iterationData.get(\"pass\"))",
+									"pm.variables.set('loginEmail', pm.iterationData.get(\"email\"))",
+									"pm.variables.set('salesChannelVtex', pm.iterationData.get(\"salesChannel\"))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey-MD}}",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken-MD}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URLVTEXMASTERDATA}}/dataentities/CL/search?email={{loginEmail}}&_fields=_all",
+							"host": [
+								"{{URLVTEXMASTERDATA}}"
+							],
+							"path": [
+								"dataentities",
+								"CL",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{loginEmail}}"
+								},
+								{
+									"key": "userId",
+									"value": "{{userIdVtex}}",
+									"disabled": true
+								},
+								{
+									"key": "_fields",
+									"value": "_all"
+								},
+								{
+									"key": "_fields",
+									"value": "email,terms_acceptance_date,termsAcceptanceDate",
+									"description": "Los campos a filtrar se separan por coma",
+									"disabled": true
+								},
+								{
+									"key": "_fields",
+									"value": "document,CencoPrime_2020,CencoPrime_CAT,email,userId",
+									"disabled": true
+								},
+								{
+									"key": "document",
+									"value": "180633553",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Obtiene los datos almacenados en masterData del usuario consultado"
+					},
+					"response": []
+				},
+				{
+					"name": "search directions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let masterDataUserObject = pm.environment.get('masterDataUserObject')",
+									"var index = 0",
+									"pm.variables.set('idVtex', masterDataUserObject[index].id)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('masterDataDirectionObject', jsonData);",
+									"//console.log(pm.environment.get('masterDataDirectionObject'))",
+									"const jar = pm.cookies.jar();",
+									"jar.clear('http://jumboprepro.vtexcommercestable.com.br')",
+									"jar.clear('https://jumboprepro.vtexcommercestable.com.br')",
+									"jar.clear('https://santaisabelhomolog.myvtex.com')",
+									"jar.clear('jumboprepro.vtexcommercestable.com.br')",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey-MD}}"
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken-MD}}"
+							}
+						],
+						"url": {
+							"raw": "{{URLVTEXMASTERDATA}}/dataentities/AD/search?userId={{idVtex}}&_fields=_all",
+							"host": [
+								"{{URLVTEXMASTERDATA}}"
+							],
+							"path": [
+								"dataentities",
+								"AD",
+								"search"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{idVtex}}",
+									"description": "Es el id de vtex"
+								},
+								{
+									"key": "_fields",
+									"value": "_all"
+								}
+							]
+						},
+						"description": "Obtiene las direcciones almacenadas en masterData para el usuario consultado (el id a consultar debe ser el de vtex)"
+					},
+					"response": []
+				},
+				{
+					"name": "Generete blank orderFomId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('orderFormIdVtex', jsonData.orderFormId);",
+									"//console.log(pm.environment.get('orderFormIdVtex'))",
+									"//console.log(\"test cookie\")",
+									"//console.log(pm.cookies);",
+									"const jar = pm.cookies.jar();",
+									"jar.clear('http://jumboprepro.vtexcommercestable.com.br')",
+									"jar.clear('https://jumboprepro.vtexcommercestable.com.br')",
+									"jar.clear('https://santaisabelhomolog.myvtex.com')",
+									"jar.clear('jumboprepro.vtexcommercestable.com.br')",
+									"//console.log(\"borra cookie\")",
+									"//console.log(pm.cookies);",
+									"",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "vtexappkey-jumboprepro-KMSANI",
+								"disabled": true
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "YXXIAWNNSCBYLOUMRWUYQSAGGXBGHDTLFFKCPCJHKEPGIVNRRONATYEFXRCCUHFOJQSGERXONNOMDTYKKJPTPSSHAEFYAGMCYAXRCHMARZNGJSBDTRSLRMZQYLFALYOG",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm"
+							]
+						},
+						"description": "Genera un orderFormId vacio.\n\nPD: Se deben limpiar las cookies para generar uno nuevo"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign user to order form",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let masterDataUserObject = pm.environment.get('masterDataUserObject')",
+									"var index = 0",
+									"pm.variables.set('email', masterDataUserObject[index].email)",
+									"pm.variables.set('firstName', masterDataUserObject[index].firstName)",
+									"pm.variables.set('lastName', masterDataUserObject[index].lastName)",
+									"pm.variables.set('document', masterDataUserObject[index].document)",
+									"pm.variables.set('documentType', masterDataUserObject[index].documentType)",
+									"pm.variables.set('phone', masterDataUserObject[index].homePhone)",
+									"pm.variables.set('corporateName', masterDataUserObject[index].corporateName)",
+									"pm.variables.set('tradeName', masterDataUserObject[index].tradeName)",
+									"pm.variables.set('corporateDocument', masterDataUserObject[index].corporateDocument)",
+									"pm.variables.set('stateInscription', null)",
+									"pm.variables.set('corporatePhone', null)",
+									"if (masterDataUserObject[index].isCorporate == null) {",
+									"    pm.variables.set('isCorporate', false)",
+									"}",
+									"else {",
+									"    pm.variables.set('isCorporate', masterDataUserObject[index].isCorporate)",
+									"}",
+									"pm.variables.set('profileCompleteOnLoading',null)",
+									"pm.variables.set('profileErrorOnLoading', null)",
+									"pm.variables.set('customerClass', null)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"document\": \"{{document}}\",\n    \"documentType\": \"{{documentType}}\",\n    \"phone\": \"{{phone}}\",\n    \"corporateName\": {{corporateName}},\n    \"tradeName\": {{tradeName}},\n    \"corporateDocument\": {{corporateDocument}},\n    \"stateInscription\": {{stateInscription}},\n    \"corporatePhone\": {{corporatePhone}},\n    \"isCorporate\": {{isCorporate}},\n    \"profileCompleteOnLoading\": {{profileCompleteOnLoading}},\n    \"profileErrorOnLoading\": {{profileErrorOnLoading}},\n    \"customerClass\": {{customerClass}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/attachments/clientProfileData",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"attachments",
+								"clientProfileData"
+							]
+						},
+						"description": "Asigna el usuario en \"clientProfileData\" a un orderForm"
+					},
+					"response": []
+				},
+				{
+					"name": "agregar productos",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let productsObjectVtex = pm.environment.get('productObjectVtex')",
+									"var index = 0",
+									"var app = pm.iterationData.get(\"app\")",
+									"let productsObject = pm.iterationData.get(\"products\");",
+									"//console.log(\"Los productos a agregar seran:\")",
+									"//console.log(productsObject)",
+									"var orderItems = [];",
+									"var orderItemsObj = function(id, quantity, seller) {",
+									"    this.id = id;",
+									"    this.quantity = quantity;",
+									"    this.seller = seller;",
+									"}",
+									"switch(app.toLowerCase()) {",
+									"    case \"jumbodev\":",
+									"    case \"spiddev\":",
+									"        orderItems = [];",
+									"        for (var i = 0; i < productsObject.length; i++) ",
+									"        {",
+									"            pm.variables.set(`skuId${i}`, productsObject[i].skuId)",
+									"            pm.variables.set(`quantity${i}`, productsObject[i].quantity)",
+									"            pm.variables.set('seller', 1)",
+									"            orderItems.push(new orderItemsObj(",
+									"                pm.variables.get(`skuId${i}`),",
+									"                pm.variables.get(`quantity${i}`),",
+									"                pm.variables.get('seller')",
+									"                ));    ",
+									"            pm.variables.set('orderItems', JSON.stringify(orderItems));",
+									"        }",
+									"        //console.log(pm.variables.get('orderItems'))",
+									"    break",
+									"    case \"sisadev\":",
+									"        //productsObject = [203,199,196]",
+									"        orderItems = [];",
+									"        for (var i = 0; i < productsObject.length; i++) ",
+									"        {",
+									"            pm.variables.set(`skuId${i}`, productsObject[i].skuId)",
+									"            pm.variables.set(`quantity${i}`, productsObject[i].quantity)",
+									"            pm.variables.set('seller', \"homologpedrofontova\")",
+									"            orderItems.push(new orderItemsObj(",
+									"                pm.variables.get(`skuId${i}`),",
+									"                pm.variables.get(`quantity${i}`),",
+									"                pm.variables.get('seller')",
+									"                ));    ",
+									"            pm.variables.set('orderItems', JSON.stringify(orderItems));",
+									"        }",
+									"        //console.log(pm.variables.get('orderItems'))",
+									"    break;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"//pm.environment.set('productObjectVtex', jsonData);",
+									"//console.log(pm.environment.get('salesChannel'))",
+									"var orderItemsObj = function(id, name, quantity) {",
+									"    this.id = id;",
+									"    this.name = name;",
+									"    this.quantity = quantity;",
+									"}",
+									"orderItems = [];",
+									"let productsObject = jsonData.items;",
+									"for (var i = 0; i < productsObject.length; i++) {",
+									"    pm.variables.set(`skuId${i}`, productsObject[i].id)",
+									"    pm.variables.set(`name${i}`, productsObject[i].name)",
+									"    pm.variables.set(`quantity${i}`, productsObject[i].quantity)",
+									"    orderItems.push(new orderItemsObj(",
+									"        pm.variables.get(`skuId${i}`),",
+									"        pm.variables.get(`name${i}`),",
+									"        pm.variables.get(`quantity${i}`)",
+									"        ));    ",
+									"}",
+									"pm.environment.set(\"cartToPay\", JSON.stringify(orderItems))",
+									"//console.log(\"Los productos agregados al carro son:\")",
+									"//console.log(orderItems)",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  //pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expectedOrderFormSections\": [\n        \"items\",\n        \"totalizers\",\n        \"clientProfileData\",\n        \"shippingData\",\n        \"paymentData\",\n        \"sellers\",\n        \"messages\",\n        \"marketingData\",\n        \"clientPreferencesData\",\n        \"storePreferencesData\",\n        \"giftRegistryData\",\n        \"ratesAndBenefitsData\",\n        \"openTextField\",\n        \"commercialConditionData\",\n        \"customData\"\n    ],\n    \"orderItems\": {{orderItems}},\n    \"noSplitItem\": false\n}"
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/items?sc={{salesChannelVtex}}",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"items"
+							],
+							"query": [
+								{
+									"key": "sc",
+									"value": "{{salesChannelVtex}}"
+								}
+							]
+						},
+						"description": "Este endpoint agrega productos a un order form.\n\nEl id corresponde al skuId"
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar Direccion a order form",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let masterDataDirectionObject = pm.environment.get('masterDataDirectionObject')",
+									"",
+									"var index = 0",
+									"var street = pm.iterationData.get(\"street\");",
+									"for (var i = 0; i < masterDataDirectionObject.length; i++){",
+									"    if (masterDataDirectionObject[i].street.includes(street) && Array.isArray(masterDataDirectionObject[i].geoCoordinates)){",
+									"        console.log(\"match:\", masterDataDirectionObject[i])",
+									"        index = i;",
+									"        break;",
+									"    }",
+									"}",
+									"",
+									"var addressObj = function(addressType, receiverName, addressId, isDisposable, postalCode, city, state, country, street, number, neighborhood, complement, reference, geoCoordinates) {",
+									"    this.addressType = addressType;",
+									"    this.receiverName = receiverName;",
+									"    this.addressId = addressId;",
+									"    this.isDisposable = isDisposable;",
+									"    this.postalCode = postalCode;",
+									"    this.city = city;",
+									"    this.state = state;",
+									"    this.country = country;",
+									"    this.street = street;",
+									"    this.number = number;",
+									"    this.neighborhood = neighborhood;",
+									"    this.complement = complement;",
+									"    this.reference = reference;",
+									"    this.geoCoordinates = [-70.674019,-33.3493771];",
+									"    //this.geoCoordinates = geoCoordinates;",
+									"}",
+									"",
+									"firstAddress = new addressObj(",
+									"    masterDataDirectionObject[index].addressType,",
+									"    masterDataDirectionObject[index].receiverName,",
+									"    masterDataDirectionObject[index].id,",
+									"    true,",
+									"    masterDataDirectionObject[index].postalCode,",
+									"    masterDataDirectionObject[index].city,",
+									"    masterDataDirectionObject[index].state,",
+									"    masterDataDirectionObject[index].country,",
+									"    masterDataDirectionObject[index].street,",
+									"    masterDataDirectionObject[index].number,",
+									"    masterDataDirectionObject[index].street,",
+									"    masterDataDirectionObject[index].neighborhood,",
+									"    masterDataDirectionObject[index].reference,",
+									"    masterDataDirectionObject[index].geoCoordinate",
+									")",
+									"",
+									"console.log(JSON.stringify(firstAddress))",
+									"",
+									"pm.variables.set('selectedAddress', JSON.stringify(firstAddress));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"//pm.environment.set('salesChannelVtex', 1);",
+									"pm.environment.set('shippingDataObjectVtex', jsonData.shippingData);",
+									"//console.log(pm.environment.get('salesChannel'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expectedOrderFormSections\": [\n        \"items\",\n        \"totalizers\",\n        \"clientProfileData\",\n        \"shippingData\",\n        \"paymentData\",\n        \"sellers\",\n        \"messages\",\n        \"marketingData\",\n        \"clientPreferencesData\",\n        \"storePreferencesData\",\n        \"giftRegistryData\",\n        \"ratesAndBenefitsData\",\n        \"openTextField\",\n        \"commercialConditionData\",\n        \"customData\"\n    ],\n    \"address\": {{selectedAddress}}\n}"
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/attachments/shippingData",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"attachments",
+								"shippingData"
+							]
+						},
+						"description": "Este endpoint asigna una dirección al oderform"
+					},
+					"response": []
+				},
+				{
+					"name": "Agrega logistic info a order form",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let shippingDataObjectVtex = pm.environment.get('shippingDataObjectVtex')",
+									"var index = 0",
+									"pm.variables.set('selectedAddress', JSON.stringify(shippingDataObjectVtex.address))",
+									"//console.log(pm.variables.get('firstAddress'))",
+									"const deliveryType = pm.iterationData.get(\"deliveryType\")",
+									"var logisticsInfoObj = function(itemIndex, selectedSla, selectedDeliveryChannel, addressId, slas, deliveryWindow, itemId, shipsTo, deliveryChannels) {",
+									"    this.itemIndex = itemIndex;",
+									"    this.selectedSla = selectedSla;",
+									"    this.selectedDeliveryChannel = selectedDeliveryChannel;",
+									"    this.addressId = addressId;",
+									"    this.slas = slas;",
+									"    this.deliveryWindow = deliveryWindow;",
+									"    this.itemId = itemId;",
+									"    this.shipsTo = shipsTo;",
+									"    this.deliveryChannels = deliveryChannels;",
+									"}",
+									"var logisticsInfo = [];",
+									"var app = pm.iterationData.get(\"app\");",
+									"switch (app) {",
+									"    case \"spiddev\":",
+									"    case \"jumbodev\":",
+									"    case \"sisadev\":",
+									"        for (var i = 0; i < shippingDataObjectVtex.logisticsInfo[0].slas.length; i++) ",
+									"        {",
+									"            const slaName = shippingDataObjectVtex.logisticsInfo[0].slas[i].name",
+									"            if (slaName.includes(deliveryType))",
+									"            {",
+									"                pm.variables.set('deliveryWindow', shippingDataObjectVtex.logisticsInfo[0].slas[i].availableDeliveryWindows[0])",
+									"                pm.variables.set('selectedSla', shippingDataObjectVtex.logisticsInfo[0].slas[i].id)",
+									"                pm.variables.set('selectedDeliveryChannel', shippingDataObjectVtex.logisticsInfo[0].slas[i].deliveryChannel)",
+									"            }",
+									"        }",
+									"        pm.variables.set('slasCko', shippingDataObjectVtex.logisticsInfo[0].slas);",
+									"        for (var i = 0; i < shippingDataObjectVtex.logisticsInfo.length; i++) ",
+									"        {",
+									"            pm.variables.set(`itemIndex${i}`, shippingDataObjectVtex.logisticsInfo[i].itemIndex);",
+									"            pm.variables.set(`selectedSla${i}`, shippingDataObjectVtex.logisticsInfo[i].selectedSla);",
+									"            pm.variables.set(`selectedDeliveryChannel${i}`, shippingDataObjectVtex.logisticsInfo[i].selectedDeliveryChannel);",
+									"            pm.variables.set(`itemId${i}`, shippingDataObjectVtex.logisticsInfo[i].itemId);",
+									"            pm.variables.set(`shipsTo${i}`, shippingDataObjectVtex.logisticsInfo[i].shipsTo);",
+									"            pm.variables.set(`shipsTo${i}`, shippingDataObjectVtex.logisticsInfo[i].deliveryChannels);",
+									"            logisticsInfo.push(new logisticsInfoObj(",
+									"                pm.variables.get(`itemIndex${i}`),",
+									"                pm.variables.get('selectedSla'),",
+									"                pm.variables.get('selectedDeliveryChannel'),",
+									"                pm.variables.get('addressId'),",
+									"                pm.variables.get('slasCko'),",
+									"                pm.variables.get('deliveryWindow'),",
+									"                pm.variables.get(`itemId${i}`),",
+									"                pm.variables.get(`shipsTo${i}`),",
+									"                pm.variables.get(`deliveryChannels${i}`)",
+									"                ));    ",
+									"                //console.log(logisticsInfo);",
+									"            pm.variables.set('logisticsInfo', JSON.stringify(logisticsInfo));",
+									"        }",
+									"    break;",
+									"}",
+									"//console.log(pm.variables.get('logisticsInfo'));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('paymentDataObjectVtex', jsonData.paymentData);",
+									"//console.log(pm.environment.get('paymentDataObjectVtex'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppKey",
+								"value": "{{X-VTEX-API-AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "X-VTEX-API-AppToken",
+								"value": "{{X-VTEX-API-AppToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expectedOrderFormSections\": [\n        \"items\",\n        \"totalizers\",\n        \"clientProfileData\",\n        \"shippingData\",\n        \"paymentData\",\n        \"sellers\",\n        \"messages\",\n        \"marketingData\",\n        \"clientPreferencesData\",\n        \"storePreferencesData\",\n        \"giftRegistryData\",\n        \"ratesAndBenefitsData\",\n        \"openTextField\",\n        \"commercialConditionData\",\n        \"customData\"\n    ],\n    \"address\": {{selectedAddress}},\n    \"logisticsInfo\": {{logisticsInfo}}\n}"
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/attachments/shippingData",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"attachments",
+								"shippingData"
+							]
+						},
+						"description": "Asigna ventana y dirección de despacho al orderForm"
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar paymentData",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var app = pm.iterationData.get(\"app\")",
+									"var paymentMethod = pm.iterationData.get(\"paymentMethod\")",
+									"let paymentDataObjectVtex = pm.environment.get('paymentDataObjectVtex')",
+									"let paymentSystemObjects = paymentDataObjectVtex.paymentSystems",
+									"let installmentOptionsObjects = paymentDataObjectVtex.installmentOptions",
+									"var paymentObj = function(paymentSystem, bin, paymentSystemName, group, value, installments, installmentsValue, referenceValue, interestRate) {",
+									"    this.paymentSystem = paymentSystem;",
+									"    this.bin = bin;",
+									"    this.paymentSystemName = paymentSystemName;",
+									"    this.group = group;",
+									"    this.value = value;",
+									"    this.installments = installments;",
+									"    this.installmentsValue = installmentsValue;",
+									"    this.referenceValue = referenceValue;",
+									"    this.interestRate = interestRate;",
+									"}",
+									"var payment = [];",
+									"",
+									"switch(app.toLowerCase()) {",
+									"    case \"jumbodev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"JumboOneClick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"202\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"DebitoOneClick\") {",
+									"                        pm.variables.set('id', paymentSystemObjects[i].id)",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"205\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"CatOneClick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"201\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 4:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"JumboPrepagoOneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"209\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;    ",
+									"        }",
+									"    break;",
+									"    //Para las otras apss se debe cambiar el id y nombre del medio de pago",
+									"    case \"spiddev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35oneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"204\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35debitooneclick\") {",
+									"                        pm.variables.set('id', paymentSystemObjects[i].id)",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"203\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35catoneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"206\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break    ",
+									"        }",
+									"    break;",
+									"    case \"sisadev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"sisaoneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"201\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"DebitoOneClick\") {",
+									"                        pm.variables.set('id', paymentSystemObjects[i].id)",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"203\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"sisacatoneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"202\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"            case 4:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"SisaPrepagoOneclick\") {",
+									"                        pm.variables.set('id', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"204\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"                payment.push(new paymentObj (",
+									"                    pm.variables.get('id'),",
+									"                    bin = null,",
+									"                    pm.variables.get('name'),",
+									"                    pm.variables.get('groupName'),",
+									"                    pm.variables.get('value'),",
+									"                    installments = 1,",
+									"                    pm.variables.get('value'),",
+									"                    pm.variables.get('total'),",
+									"                    interestRate = 1,",
+									"                ));",
+									"            break;",
+									"        }",
+									"    break;",
+									"} ",
+									"//console.log(JSON.stringify(payment))",
+									"pm.variables.set('paymentsBody', JSON.stringify(payment));",
+									"//console.log(pm.variables.get('paymentsBody'))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('paymentDataObjectVtex', jsonData.paymentData);",
+									"//console.log(pm.environment.get('paymentDataObjectVtex'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-vtex-api-appToken",
+								"value": "{{X-VTEX-API-AppToken}}"
+							},
+							{
+								"key": "x-vtex-api-appKey",
+								"value": "{{X-VTEX-API-AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expectedOrderFormSections\": [\n        \"items\",\n        \"totalizers\",\n        \"clientProfileData\",\n        \"shippingData\",\n        \"paymentData\",\n        \"sellers\",\n        \"messages\",\n        \"marketingData\",\n        \"clientPreferencesData\",\n        \"storePreferencesData\",\n        \"giftRegistryData\",\n        \"ratesAndBenefitsData\",\n        \"openTextField\",\n        \"commercialConditionData\",\n        \"customData\"\n    ],\n    \"payments\": {{paymentsBody}}\n}"
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/attachments/paymentData",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"attachments",
+								"paymentData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save transaction to vtex",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var app = pm.iterationData.get(\"app\")",
+									"var paymentMethod = pm.iterationData.get(\"paymentMethod\")",
+									"let paymentDataObjectVtex = pm.environment.get('paymentDataObjectVtex')",
+									"let paymentSystemObjects = paymentDataObjectVtex.paymentSystems",
+									"let installmentOptionsObjects = paymentDataObjectVtex.installmentOptions",
+									"console.log(installmentOptionsObjects)",
+									"",
+									"switch(app.toLowerCase()) {",
+									"    case \"jumbodev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"202\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"205\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"201\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;  ",
+									"            case 4:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"209\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;  ",
+									"        }",
+									"    break;",
+									"    case \"spiddev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"204\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"203\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"206\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;    ",
+									"        }",
+									"    break;",
+									"    case \"sisadev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"201\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"203\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"202\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;  ",
+									"            case 4:",
+									"                for (var i = 0; i < installmentOptionsObjects.length; i++) {",
+									"                    if (installmentOptionsObjects[i].paymentSystem == \"204\") {",
+									"                        pm.variables.set('value', installmentOptionsObjects[i].installments[0].value)",
+									"                        pm.variables.set('total', installmentOptionsObjects[i].installments[0].total)",
+									"                        pm.variables.set('interestRate', installmentOptionsObjects[i].installments[0].interestRate)",
+									"                    }",
+									"                }",
+									"            break;   ",
+									"        }",
+									"    break;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('orderGroupVtex', jsonData.orderGroup);",
+									"pm.environment.set('paymentObjectVtex', jsonData);",
+									"//console.log(pm.environment.get('orderGroupVtex'))",
+									"pm.environment.set('cookieCKO', pm.response.headers.get('Set-Cookie'))",
+									"//console.log(pm.environment.get('cookieCKO'))",
+									"pm.test(\"Test OK\", () => {",
+									"    pm.response.to.have.status(200);",
+									"    //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-vtex-api-appToken",
+								"value": "{{X-VTEX-API-AppToken}}"
+							},
+							{
+								"key": "x-vtex-api-appKey",
+								"value": "{{X-VTEX-API-AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"referenceId\": \"{{orderFormIdVtex}}\",\n    \"value\": {{value}},\n    \"interestValue\": {{interestRate}},\n    \"referenceValue\": {{total}},\n    \"savePersonalData\": true,\n    \"optinNewsLetter\": false,\n    \"expectedOrderFormSections\": [\n        \"items\",\n        \"totalizers\",\n        \"clientProfileData\",\n        \"shippingData\",\n        \"paymentData\",\n        \"sellers\",\n        \"messages\",\n        \"marketingData\",\n        \"clientPreferencesData\",\n        \"storePreferencesData\",\n        \"giftRegistryData\",\n        \"ratesAndBenefitsData\",\n        \"openTextField\",\n        \"commercialConditionData\",\n        \"customData\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/orderForm/{{orderFormIdVtex}}/transaction",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"orderForm",
+								"{{orderFormIdVtex}}",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment transaction vtex",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var app = pm.iterationData.get(\"app\")",
+									"var paymentMethod = pm.iterationData.get(\"paymentMethod\")",
+									"let paymentDataObjectVtex = pm.environment.get('paymentDataObjectVtex')",
+									"let paymentSystemObjects = paymentDataObjectVtex.paymentSystems",
+									"let paymentObjectVtex = pm.environment.get('paymentObjectVtex')",
+									"pm.variables.set('id', paymentObjectVtex.merchantTransactions[0].id)",
+									"pm.variables.set('transactionId', paymentObjectVtex.merchantTransactions[0].transactionId)",
+									"pm.variables.set('paymentSystemName', paymentObjectVtex.merchantTransactions[0].payments[0].paymentSystem)",
+									"pm.variables.set('paymentSystem', parseInt(pm.variables.get('paymentSystemName')))",
+									"pm.variables.set('value', paymentObjectVtex.merchantTransactions[0].payments[0].value)",
+									"pm.variables.set('referenceValue', paymentObjectVtex.merchantTransactions[0].payments[0].referenceValue)",
+									"",
+									"switch(app.toLowerCase()) {",
+									"    case \"jumbodev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"JumboOneClick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"DebitoOneClick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"CatOneClick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 4:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"JumboPrepagoOneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"        }",
+									"    break;",
+									"    case \"spiddev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35oneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35debitooneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"spid35catoneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"        }",
+									"    break;",
+									"    case \"sisadev\":",
+									"        switch (paymentMethod) {",
+									"            case 1:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"sisaoneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 3:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"DebitoOneClick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 2:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"sisacatoneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"            case 4:",
+									"                for (var i = 0; i < paymentSystemObjects.length; i++) {",
+									"                    if (paymentSystemObjects[i].name == \"SisaPrepagoOneclick\") {",
+									"                        pm.variables.set('paymentSystemName', JSON.stringify(paymentSystemObjects[i].id))",
+									"                        pm.variables.set('name', paymentSystemObjects[i].name)",
+									"                        pm.variables.set('groupName', paymentSystemObjects[i].groupName)",
+									"                    }",
+									"                }",
+									"            break;",
+									"        }",
+									"    break; ",
+									"}",
+									"var value = pm.variables.get(\"value\")/100;",
+									"pm.environment.set('totalPay', value)",
+									"console.log(\"Se realizará el pago con el medio de pago \\nId: \" + pm.variables.get('paymentSystemName') + \"\\nNombre: \" + pm.variables.get('groupName') + \"\\nTotal de la compra: $\" + value)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test OK\", () => {",
+									"    pm.response.to.have.status(201);",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-vtex-api-appToken",
+								"value": "{{X-VTEX-API-AppToken}}"
+							},
+							{
+								"key": "x-vtex-api-appKey",
+								"value": "{{X-VTEX-API-AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{id}}\",\n        \"paymentSystem\": {{paymentSystem}},\n        \"installments\": 1,\n        \"currencyCode\": \"CLP\",\n        \"value\": {{value}},\n        \"installmentsInterestRate\": null,\n        \"installmentsValue\": {{value}},\n        \"installmentValue\": 0,\n        \"referenceValue\": {{referenceValue}},\n        \"originalPaymentIndex\": 0,\n        \"fields\": {\n            \"callBackUrl\": null\n        },\n        \"groupName\": \"{{groupName}}\",\n        \"paymentSystemName\": \"{{paymentSystemName}}\",\n        \"transaction\": {\n            \"id\": \"{{transactionId}}\",\n            \"merchantName\": \"{{id}}\"\n        }\n    }\n]"
+						},
+						"url": {
+							"raw": "{{URLVTEXPAYMENT}}/pub/transactions/{{transactionId}}/payments",
+							"host": [
+								"{{URLVTEXPAYMENT}}"
+							],
+							"path": [
+								"pub",
+								"transactions",
+								"{{transactionId}}",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gatewayCallback/orderGroup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var cookieCKO = pm.environment.get('cookieCKO')",
+									"// domain cambia segun el ambiente y aplicativo",
+									"var scope = pm.variables.get('scope')",
+									"var path = \" domain=\" + scope + \"; Expires=Mon, 26 Jan 2032 16:58:38 GMT\"",
+									"pm.variables.set('Cookie', cookieCKO + path)",
+									"//console.log(pm.variables.get('Cookie'))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"//console.log(jsonData)",
+									"var redirectUrl = jsonData.RedirectResponseCollection[0].redirectUrl;",
+									"//console.log(redirectUrl)",
+									"var tid = redirectUrl.split(\"tid/\");",
+									"//console.log(tid[1])",
+									"pm.environment.set('paymentTransactionId', tid[1].slice(0, -1));",
+									"console.log(\"Se realizará la compra con el id: \" + pm.environment.get('orderGroupVtex'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(428);",
+									"  pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-vtex-api-appToken",
+								"value": "{{X-VTEX-API-AppToken}}"
+							},
+							{
+								"key": "x-vtex-api-appKey",
+								"value": "{{X-VTEX-API-AppKey}}"
+							},
+							{
+								"key": "Cookie",
+								"value": "{{Cookie}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URLVTEX}}/checkout/pub/gatewayCallback/{{orderGroupVtex}}",
+							"host": [
+								"{{URLVTEX}}"
+							],
+							"path": [
+								"checkout",
+								"pub",
+								"gatewayCallback",
+								"{{orderGroupVtex}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all card",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let masterDataUserObject = pm.environment.get('masterDataUserObject')",
+									"var index = 0",
+									"pm.variables.set('userId', masterDataUserObject[index].userId)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('cardsObject', jsonData.payload)",
+									"//console.log(pm.environment.get('cardsObject'))",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKeyPayment}}"
+							}
+						],
+						"url": {
+							"raw": "{{URLPAYMENT}}/cards/{{userId}}",
+							"host": [
+								"{{URLPAYMENT}}"
+							],
+							"path": [
+								"cards",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authorize payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var app = pm.iterationData.get(\"app\")",
+									"var paymentMethod = pm.iterationData.get(\"paymentMethod\")",
+									"let cardsObject = pm.environment.get('cardsObject')",
+									"",
+									"switch (paymentMethod) {",
+									"    case 1: //credito",
+									"        for (var i = 0; i < cardsObject.cards.length; i++){",
+									"            if (cardsObject.cards[i].paymentMethod == \"OneClick\")",
+									"            {",
+									"                pm.variables.set('cardToken', cardsObject.cards[i].token)",
+									"                console.log(\"Se realizará la compra con la tarjeta :\" + JSON.stringify(cardsObject.cards[i]))",
+									"                break;",
+									"            }",
+									"        }",
+									"    break;",
+									"    case 2: //cat",
+									"        for (var i = 0; i < cardsObject.cards.length; i++){",
+									"            if (cardsObject.cards[i].paymentMethod == \"CATOneClick\")",
+									"            {",
+									"                pm.variables.set('cardToken', cardsObject.cards[i].token)",
+									"                console.log(\"Se realizará la compra con la tarjeta :\" + JSON.stringify(cardsObject.cards[i]))",
+									"                break;",
+									"            }",
+									"        }",
+									"    break;",
+									"    case 3: //debito",
+									"        for (var i = 0; i < cardsObject.cards.length; i++){",
+									"            if (cardsObject.cards[i].paymentMethod == \"DebitoOneClick\")",
+									"            {",
+									"                pm.variables.set('cardToken', cardsObject.cards[i].token)",
+									"                console.log(\"Se realizará la compra con la tarjeta :\" + JSON.stringify(cardsObject.cards[i]))",
+									"                break;",
+									"            }",
+									"        }",
+									"    break;",
+									"    case 4: //prepago",
+									"        for (var i = 0; i < cardsObject.cards.length; i++){",
+									"            if (cardsObject.cards[i].paymentMethod == \"Prepago\")",
+									"            {",
+									"                pm.variables.set('cardToken', cardsObject.cards[i].token)",
+									"                console.log(\"Se realizará la compra con la tarjeta :\" + JSON.stringify(cardsObject.cards[i]))",
+									"                break;",
+									"            }",
+									"        }",
+									"    break;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"let transactionObject = jsonData.payload.transaction;",
+									"var status = transactionObject.status;",
+									"var authDate = transactionObject.authDate;",
+									"var buyerEmail = transactionObject.params.buyerEmail;",
+									"var paymentMethod = transactionObject.params.paymentMethod;",
+									"var cardTokenId = transactionObject.params.cardTokenId;",
+									"var responseMessage = transactionObject.params.responseMessage;",
+									"",
+									"console.log(\"Se realizo la siguiente compra: \\n Id de compra: \" + pm.environment.get('orderGroupVtex') + \"\\n Usuario: \" + buyerEmail + \"\\n Medio de pago: \" + paymentMethod + \"\\n Fecha: \" + authDate + \"\\n Estado de la compra: \" + status + \" - \" + responseMessage + \"\\n Total Pagado: $\" + pm.environment.get(\"totalPay\") + \"\\n Carro comprado: \" + pm.environment.get(\"cartToPay\"))",
+									"",
+									"pm.test(\"Test OK\", () => {",
+									"  const responseJson = pm.response.json();",
+									"  pm.response.to.have.status(200);",
+									"  //pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "lIMg6hgdwr5wYIdEwJHjq2ODwZr87XyF1u6oBU3e",
+								"description": "spid",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "v9fZ61YAVAa87hmNUR7sNv3LI211TRac",
+								"description": "jumbo pre pro",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "bQFWLgmiIS97NlSKLZAoQ5YWlgZTvTbh5FV7eKs3",
+								"description": "sisa",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{apiKeyPayment}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URLPAYMENT}}/pay/authorize/{{paymentTransactionId}}/{{cardToken}}",
+							"host": [
+								"{{URLPAYMENT}}"
+							],
+							"path": [
+								"pay",
+								"authorize",
+								"{{paymentTransactionId}}",
+								"{{cardToken}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

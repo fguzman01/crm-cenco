@@ -1,0 +1,65 @@
+stages:
+  - build
+  - test
+  - upload
+  #- report
+
+include:
+  - project: "cicd/gitlabci-templates/gitlabci-template-cencoreg"
+    ref: "master"
+    file: "/gitlabci-template.yml"
+
+Build:
+  stage: build
+  script:
+    - mvn clean
+  tags:
+    - Appium
+    - Windows
+
+
+Test:
+  stage: test
+  allow_failure: true
+  script:
+    - mvn compile test -DsuiteXmlFile="AsignarDAD1SKU.xml"
+  artifacts:
+    when: always
+    paths:
+      - allure-results
+    expire_in: 1 week
+  tags:
+    - Appium
+    - Windows
+
+#upload:
+ # stage: upload
+ # script: mvn clean
+
+
+#upload-artifact:
+ # stage: upload
+ # variables:
+  #  ARTIFACT: "allure-results"
+  #extends: .upload_artifact_to_nexus
+
+
+       #Report:
+#  stage: report
+#  when: always
+#  dependencies:
+#    - smoke
+#  variables:
+#    ARTIFACT: "allure-results"
+#  script:
+#    - mkdir public
+#    - allure generate ./allure-results --clean -o allure-report
+#    - mv allure-report/* public
+
+#  tags:
+#     - Appium
+#     - Windows
+
+
+
+

@@ -1,0 +1,62 @@
+[
+   { 
+      "email": "icolorado@yopmail.com", 
+      "paymentMethod": 1, 
+	   "app": "sisadev", 
+	   "products": [
+	      { "skuId": 3136, 
+	       "quantity": 1 }
+	    ], 
+	 "salesChannel": 1, 
+	 "street": "Camino del Roble", 
+	 "deliveryType": "Despacho a Domicilio" 
+  },
+  { 
+      "email": "icolorado@yopmail.com", 
+      "paymentMethod": 1, 
+	   "app": "sisadev", 
+	   "products": [
+	      { "skuId": 3136, 
+	       "quantity": 1 }
+	    ], 
+	 "salesChannel": 1, 
+	 "street": "Camino del Roble", 
+	 "deliveryType": "Despacho a Domicilio" 
+  },
+  { 
+      "email": "icolorado@yopmail.com", 
+      "paymentMethod": 1, 
+	   "app": "sisadev", 
+	   "products": [
+	      { "skuId": 3136, 
+	       "quantity": 1 }
+	    ], 
+	 "salesChannel": 1, 
+	 "street": "Camino del Roble", 
+	 "deliveryType": "Despacho a Domicilio" 
+  },
+  { 
+      "email": "icolorado@yopmail.com", 
+      "paymentMethod": 1, 
+	   "app": "sisadev", 
+	   "products": [
+	      { "skuId": 3136, 
+	       "quantity": 1 }
+	    ], 
+	 "salesChannel": 1, 
+	 "street": "Camino del Roble", 
+	 "deliveryType": "Despacho a Domicilio" 
+  },
+  { 
+      "email": "icolorado@yopmail.com", 
+      "paymentMethod": 1, 
+	   "app": "sisadev", 
+	   "products": [
+	      { "skuId": 3136, 
+	       "quantity": 1 }
+	    ], 
+	 "salesChannel": 1, 
+	 "street": "Camino del Roble", 
+	 "deliveryType": "Despacho a Domicilio" 
+  }
+]

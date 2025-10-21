@@ -1,0 +1,41 @@
+[
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 1,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 62809,"quantity": 10},
+			{"skuId": 48933,"quantity": 10},
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 1,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 62809,"quantity": 10},
+			{"skuId": 48933,"quantity": 10},
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 1,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 62809,"quantity": 10},
+			{"skuId": 48933,"quantity": 10},
+            {"skuId": 24307,"quantity": 1}	
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 3,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 62809,"quantity": 9},
+			{"skuId": 62792,"quantity": 9},
+			{"skuId": 48933,"quantity": 9}
+			
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho a Domicilio"
+    }
+]

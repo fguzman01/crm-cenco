@@ -1,0 +1,12 @@
+{
+  "tests" : [ 
+    { 
+      "user": "felipe.arayag@cencosud.cl",
+      "pass": "Jumbo0001",
+      "orden": "10082353",
+      "estado": "Pendiente picking",
+      "mailPicker" :"felipe.arayag@cencosud.cl",
+      "nombrePicker" : "Felipe Guzman"
+    }
+  ]
+}

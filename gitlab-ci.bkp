@@ -1,0 +1,83 @@
+stages:
+  - test
+  - upload
+  - allure
+  - deploy
+
+include:
+  - project: "cicd/gitlabci-templates/gitlabci-template-cencoreg"
+    ref: "master"
+    file: "/gitlabci-template.yml"
+
+
+.test_template: &test_template
+  allow_failure: true
+  stage: test
+  image: cencoreg:5000/qc/maven/maven:3.6.3-openjdk-8-chrome-v2
+  script:
+    - mvn compile test
+  after_script:
+    - taskkill /F /IM chromedriver.exe /T
+  artifacts:
+    when: always
+    paths:
+      - allure-results/
+  tags:
+    - eom
+    - selenium
+    - windows
+smoke:
+  <<: *test_template
+
+upload-artifact:
+  stage: upload
+  variables:
+    ARTIFACT: "allure-results"
+  extends: .upload_artifact_to_nexus
+  dependencies:
+    - smoke
+
+allure_report:
+  stage: allure
+  when: always
+  image: cencoreg:5000/qc/maven/maven-3.6.3-openjdk-8-chrome-allure:v1
+  dependencies:
+    - upload-artifact
+  script:
+    #    -  apt-get update --fix-missing && apt-get install nodejs npm  -y
+    #    - mkdir backup && cd backup || true
+    #    - curl --location --output report.zip --request GET "http://gitlab.cencosud.net/api/v4/projects/6097/jobs/artifacts/master/download?job=pages\" --header \"Authorization: Bearer JdrSbfZSRp8bd2PBu-Km\"
+    #    - dir *.*
+    #    - apt-get update
+    #    - apt-get install -y unzip
+    #    - (unzip report.zip) || true
+    #    - dir *.*
+    #    - cd ../
+    #    - (cp -r backup/public/history/ allure-results/history) || true
+    - npm install allure
+    - npm install -g allure-commandline --save-dev
+    - npm update allure
+    - allure generate allure-results
+  artifacts:
+    when: always
+    paths:
+      - allure-report/
+      - allure-results/
+  only:
+    - master
+    - develop
+
+pages:
+  stage: deploy
+  when: always
+  dependencies:
+    - allure_report
+  script:
+    - mv allure-report/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
+    - develop

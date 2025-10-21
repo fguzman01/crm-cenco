@@ -1,0 +1,41 @@
+[
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 3,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 62809,"quantity": 7},
+			{"skuId": 47703,"quantity": 7},
+			{"skuId": 48933,"quantity": 7}  
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Retiro en Tienda"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 2,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 62809,"quantity": 7},
+			{"skuId": 47703,"quantity": 7},
+			{"skuId": 48933,"quantity": 7}  
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Retiro en Tienda"
+    },
+    {
+        "email": "miguel.flores@cencosud.cl",
+        "paymentMethod": 1,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 62809,"quantity": 7},
+			{"skuId": 47703,"quantity": 7},
+			{"skuId": 48933,"quantity": 7}  
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Retiro en Tienda"
+    }
+]

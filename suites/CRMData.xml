@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="testng">
+	<test name="BOTest" >
+		<classes>
+			<class name="cencosud.tests.OrquestadorDataE2E.Test_Orquestador_E2E" />
+			      <methods>
+                    <include name="TD_GeneracionOrdenFinal_TestOsquestador"/>
+                </methods>
+		</classes>
+	</test>
+</suite> 

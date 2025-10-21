@@ -1,0 +1,35 @@
+[
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 3,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 48933,"quantity": 1}   
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    },
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 2,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 48933,"quantity": 1}   
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    },
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 1,
+        "app": "jumbodev",
+        "products": [
+            {"skuId": 48933,"quantity": 1}   
+        ],
+        "salesChannel": 1,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Especial 1500"
+    }
+]

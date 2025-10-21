@@ -1,0 +1,33 @@
+- Validar suma y resta activas
+- Validar lograda suma y resta
+- Validar lograda parcialmente suma y resta
+- Validar no lograda parcialmente suma y resta (Con % menor al 50)
+- Validar no lograda todos los productos rechazados
+
+
+
+Productos:
+
+Leche descremada : 7802900001346
+Aceite : 7790272001005
+
+
+
+
+--------------------------------------------------------------------------
+Token de usuarios:
+
+
+a8936e26-b160-11ee-8452-0e7f741a874d
+
+
+41d0466c-b00c-11ee-8452-12d272a14f73
+
+
+fguzman : 1253ea61-8eee-11ee-8452-0e09d9945b6f
+nelson  : e344a58a-8ef9-11ee-8452-0a8a751a1961
+Miguel :  c6c1b400-8ef5-11ee-8452-0efa660bec3d
+
+
+
+

@@ -1,0 +1,28 @@
+[
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 1,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 62809,"quantity": 7},
+			{"skuId": 62792,"quantity": 7},
+			{"skuId": 48933,"quantity": 7}  
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Express"
+    },
+    {
+        "email": "nelson.ruizfaundez@externos-cl.cencosud.com",
+        "paymentMethod": 1,
+        "app": "spiddev",
+        "products": [
+            {"skuId": 62809,"quantity": 7},
+			{"skuId": 62792,"quantity": 7},
+			{"skuId": 48933,"quantity": 7}  
+        ],
+        "salesChannel": 42,
+        "street": "Arturo Prat",
+        "deliveryType": "Despacho Express"
+    }
+]
